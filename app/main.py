@@ -2,10 +2,13 @@
 
 from fastapi import FastAPI
 from pydantic import BaseModel
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 
-# Sample user model
+# Instrumentation for Prometheus
+Instrumentator().instrument(app).expose(app)
+
 class User(BaseModel):
     username: str
     email: str
